@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bloodorganmanagementsystem</groupId>
-	<artifactId>app</artifactId>
+	<artifactId>userinterface</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>app</name>
-	<description>This app facilitates blood and organ bank services to hospitals, organ banks, and blood banks (members of the healthcare community) and will be deployed on Microsoft Azure.</description>
+	<name>userinterface</name>
+	<description>User interface for blood organ management system </description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -21,22 +21,13 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>com.oracle.ojdbc</groupId>
-			<artifactId>ojdbc8</artifactId>
-			<scope>runtime</scope>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -49,11 +40,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		 <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <optional>true</optional>
-    </dependency>
 	</dependencies>
 
 	<build>
