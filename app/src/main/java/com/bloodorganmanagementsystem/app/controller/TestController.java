@@ -1,4 +1,4 @@
-package com.bloodorganmanagementsystem.app;
+package com.bloodorganmanagementsystem.app.controller;
 
 //package com.bloodorganmanagementsystem.app.webservices.controller;
 
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/Stats")
-public class test {
+public class TestController {
 
 	@RequestMapping()
     public Integer getTotalDonationCount( String entityName){

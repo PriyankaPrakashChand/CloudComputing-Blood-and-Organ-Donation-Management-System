@@ -1,11 +1,11 @@
-package com.bloodorganmanagementsystem.app.webservices.controller;
+package com.bloodorganmanagementsystem.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bloodorganmanagementsystem.app.entities.Individual;
-import com.bloodorganmanagementsystem.app.repositories.IndividualRepository;
+import com.bloodorganmanagementsystem.app.repository.IndividualRepository;
 
 
 @RestController
