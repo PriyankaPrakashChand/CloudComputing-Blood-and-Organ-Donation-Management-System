@@ -3,7 +3,7 @@ package com.bloodorganmanagementsystem.app.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.bloodorganmanagementsystem.app.dto.Donations;
+import com.bloodorganmanagementsystem.app.dto.Donation;
 import com.bloodorganmanagementsystem.app.dto.IndividualDetails;
 import com.bloodorganmanagementsystem.app.dto.Profile;
 import com.bloodorganmanagementsystem.app.entities.Individual;
@@ -16,18 +16,16 @@ public interface IndividualService {
 
     public Optional<Individual> findById(String findId);
 
-    public Optional<Test> addTest(Integer testId, Integer TestValue);
+    public boolean addTest(String individualId, Integer testId, Integer testValue,String licenseKey) throws AppException;
 
-    public boolean Register(IndividualDetails details);
+    public boolean Register(IndividualDetails details) throws AppException;
 
-    public boolean ModifyProfile(String individualId, Profile profile);
+    public boolean ModifyProfile(String individualId, Profile profile,String licenseKey) throws AppException;
 
-    public boolean Donate(String individualId, String licenseKey);
+    public boolean Donate(long donationEntityTypeId, String individualId, String licenceKey) throws AppException;
 
-    public boolean AcceptDonationRequest(String individualId, Integer donationEntityId);
+    public List<Donation> viewDonations(String individualId) throws AppException;
 
-    public  List<Donations> viewDonations(String individualId);
-
-    public Profile viewProfile(String individualId);
+    public Profile viewProfile(String individualId) throws AppException;
 
 }
