@@ -1,4 +1,4 @@
- package com.bloodorganmanagementsystem.app.repositories;
+ package com.bloodorganmanagementsystem.app.repository;
 
 import com.bloodorganmanagementsystem.app.entities.Test;
 import org.springframework.data.repository.CrudRepository;
