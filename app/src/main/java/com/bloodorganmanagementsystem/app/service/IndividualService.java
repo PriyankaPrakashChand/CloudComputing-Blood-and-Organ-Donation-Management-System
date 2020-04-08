@@ -20,7 +20,7 @@ public interface IndividualService {
 
     public boolean Register(IndividualDetails details) throws AppException;
 
-    public boolean ModifyProfile(String individualId, Profile profile,String licenseKey) throws AppException;
+    public boolean AddProfile(String individualId, Profile profile,String licenseKey) throws AppException;
 
     public boolean Donate(long donationEntityTypeId, String individualId, String licenceKey) throws AppException;
 

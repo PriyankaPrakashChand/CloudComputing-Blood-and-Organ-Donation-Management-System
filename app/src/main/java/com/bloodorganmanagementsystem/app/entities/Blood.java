@@ -26,8 +26,7 @@ public class Blood implements Serializable {
 	private BloodType bloodType;
 
 	//bi-directional many-to-one association to Member
-	@ManyToOne
-	@JoinColumn(name="MEMBER_ID")
+	@JoinColumn(name="MEMBER_ID", referencedColumnName="MEMBER_ID")
 	private Member member;
 
 	public Blood() {

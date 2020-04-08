@@ -17,13 +17,13 @@ public class DonationEntity implements Serializable {
 	@Id
 	@Column(name="DONATION_ENTITY_ID")
 	private long donationEntityId;
-
+	
 	@Column(name="STATE_ID")
 	private java.math.BigDecimal stateId;
 
 	//bi-directional many-to-one association to CompletedDonationLog
-	@OneToMany(mappedBy="donationEntity")
-	private List<CompletedDonationLog> completedDonationLogs;
+	
+	private CompletedDonationLog completedDonationLog;
 
 	//bi-directional many-to-one association to EntityType
 	@ManyToOne
@@ -54,27 +54,15 @@ public class DonationEntity implements Serializable {
 		this.stateId = stateId;
 	}
 
-	public List<CompletedDonationLog> getCompletedDonationLogs() {
-		return this.completedDonationLogs;
+	public CompletedDonationLog getCompletedDonationLog() {
+		return this.completedDonationLog;
 	}
 
-	public void setCompletedDonationLogs(List<CompletedDonationLog> completedDonationLogs) {
-		this.completedDonationLogs = completedDonationLogs;
+	public void setCompletedDonationLog(CompletedDonationLog completedDonationLog) {
+		this.completedDonationLog = completedDonationLog;
 	}
 
-	public CompletedDonationLog addCompletedDonationLog(CompletedDonationLog completedDonationLog) {
-		getCompletedDonationLogs().add(completedDonationLog);
-		completedDonationLog.setDonationEntity(this);
-
-		return completedDonationLog;
-	}
-
-	public CompletedDonationLog removeCompletedDonationLog(CompletedDonationLog completedDonationLog) {
-		getCompletedDonationLogs().remove(completedDonationLog);
-		completedDonationLog.setDonationEntity(null);
-
-		return completedDonationLog;
-	}
+	
 
 	public EntityType getEntityType() {
 		return this.entityType;

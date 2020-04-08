@@ -30,7 +30,7 @@ public class EligibilityToDonate implements Serializable {
 	private Integer liver;
 
 	//bi-directional many-to-one association to Test
-	@ManyToOne
+	
 	@JoinColumn(name="TEST_ID")
 	private Test test;
 

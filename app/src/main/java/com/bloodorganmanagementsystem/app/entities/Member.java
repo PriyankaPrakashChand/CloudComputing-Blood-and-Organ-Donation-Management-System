@@ -34,8 +34,8 @@ public class Member implements Serializable {
 	private String phoneNumber;
 
 	//bi-directional many-to-one association to Blood
-	@OneToMany(mappedBy="member")
-	private List<Blood> bloods;
+	
+	private Blood blood;
 
 	//bi-directional many-to-one association to CompletedDonationLog
 	@OneToMany(mappedBy="member")
@@ -59,8 +59,8 @@ public class Member implements Serializable {
 	private Activityid activityid;
 
 	//bi-directional many-to-one association to Test
-	@OneToMany(mappedBy="member")
-	private List<Test> tests;
+	@OneToOne(mappedBy="member")
+	private Test test;
 
 	public Member() {
 	}
@@ -129,27 +129,14 @@ public class Member implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public List<Blood> getBloods() {
-		return this.bloods;
+	public Blood getBlood() {
+		return this.blood;
 	}
 
-	public void setBloods(List<Blood> bloods) {
-		this.bloods = bloods;
+	public void setBlood(Blood blood) {
+		this.blood = blood;
 	}
 
-	public Blood addBlood(Blood blood) {
-		getBloods().add(blood);
-		blood.setMember(this);
-
-		return blood;
-	}
-
-	public Blood removeBlood(Blood blood) {
-		getBloods().remove(blood);
-		blood.setMember(null);
-
-		return blood;
-	}
 
 	public List<CompletedDonationLog> getCompletedDonationLogs() {
 		return this.completedDonationLogs;
@@ -219,26 +206,13 @@ public class Member implements Serializable {
 		this.activityid = activityid;
 	}
 
-	public List<Test> getTests() {
-		return this.tests;
+	public Test getTest() {
+		return this.test;
 	}
 
-	public void setTests(List<Test> tests) {
-		this.tests = tests;
+	public void setTest(Test test) {
+		this.test = test;
 	}
 
-	public Test addTest(Test test) {
-		getTests().add(test);
-		test.setMember(this);
-
-		return test;
-	}
-
-	public Test removeTest(Test test) {
-		getTests().remove(test);
-		test.setMember(null);
-
-		return test;
-	}
-
+	
 }

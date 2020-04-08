@@ -66,8 +66,8 @@ public class Test implements Serializable {
 	private Integer urine;
 
 	//bi-directional many-to-one association to EligibilityToDonate
-	@OneToMany(mappedBy="test")
-	private List<EligibilityToDonate> eligibilityToDonates;
+	
+	private EligibilityToDonate eligibilityToDonate;
 
 	//bi-directional many-to-one association to Member
 	@ManyToOne
@@ -277,28 +277,15 @@ public class Test implements Serializable {
 		this.urine = urine;
 	}
 
-	public List<EligibilityToDonate> getEligibilityToDonates() {
-		return this.eligibilityToDonates;
+	public EligibilityToDonate getEligibilityToDonate() {
+		return this.eligibilityToDonate;
 	}
 
-	public void setEligibilityToDonates(List<EligibilityToDonate> eligibilityToDonates) {
-		this.eligibilityToDonates = eligibilityToDonates;
+	public void setEligibilityToDonate(EligibilityToDonate eligibilityToDonate) {
+		this.eligibilityToDonate = eligibilityToDonate;
 	}
 
-	public EligibilityToDonate addEligibilityToDonate(EligibilityToDonate eligibilityToDonate) {
-		getEligibilityToDonates().add(eligibilityToDonate);
-		eligibilityToDonate.setTest(this);
-
-		return eligibilityToDonate;
-	}
-
-	public EligibilityToDonate removeEligibilityToDonate(EligibilityToDonate eligibilityToDonate) {
-		getEligibilityToDonates().remove(eligibilityToDonate);
-		eligibilityToDonate.setTest(null);
-
-		return eligibilityToDonate;
-	}
-
+	
 	public Member getMember() {
 		return this.member;
 	}

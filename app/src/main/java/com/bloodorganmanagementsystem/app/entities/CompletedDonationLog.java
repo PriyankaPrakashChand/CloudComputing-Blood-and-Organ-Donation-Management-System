@@ -23,12 +23,12 @@ public class CompletedDonationLog implements Serializable {
 	private Date donationDate;
 
 	//bi-directional many-to-one association to DonationEntity
-	@ManyToOne
+	
 	@JoinColumn(name="DONATION_ENTITY_ID")
 	private DonationEntity donationEntity;
 
 	//bi-directional many-to-one association to Member
-	@ManyToOne
+	
 	@JoinColumn(name="RECEPIENT_ID")
 	private Member member;
 
