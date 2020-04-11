@@ -1,100 +1,45 @@
 package com.bloodorganmanagementsystem.app.entities;
 
-import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
 
+import com.microsoft.azure.spring.data.cosmosdb.core.mapping.Document;
 
-/**
- * The persistent class for the HEALTH_ORGANIZATION database table.
- * 
- */
-@Entity
-@Table(name="HEALTH_ORGANIZATION")
-public class HealthOrganization implements Serializable {
-	private static final long serialVersionUID = 1L;
+import org.springframework.data.annotation.Id;
 
-	@Id
-	@Column(name="HEALTH_ORG_ID")
-	private String healthOrgId;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-	@Column(name="LISENCE_KEY")
+enum OrganganizationInterest{
+	RECEIVE,DONATE,BOTH
+}
+enum EntityPreference {
+	BLOOD,BONE_MARROW,EYES,HEART,KIDNEY,LIVER
+}
+@Document(collection="HEALTH_ORGANIZATION_COLLECTION")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class HealthOrganization  {
+	
+
+	@Id // registeration 
+	private String id;
 	private String lisenceKey;
-
-	@Column(name="ORG_NAME")
 	private String orgName;
-
-	//bi-directional one-to-one association to Member
-	@OneToOne
-	@JoinColumn(name="HEALTH_ORG_ID")
-	private Member member;
-
-	//bi-directional many-to-many association to HealthOrganization
-	@ManyToMany
-	@JoinTable(
-		name="MAP_ORG_PARTNER"
-		, joinColumns={
-			@JoinColumn(name="HEALTH_ORG_ID1")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="HEALTH_ORG_ID2")
-			}
-		)
-	private List<HealthOrganization> healthOrganizations1;
-
-	//bi-directional many-to-many association to HealthOrganization
-	@ManyToMany(mappedBy="healthOrganizations1")
-	private List<HealthOrganization> healthOrganizations2;
-
-	public HealthOrganization() {
-	}
-
-	public String getHealthOrgId() {
-		return this.healthOrgId;
-	}
-
-	public void setHealthOrgId(String healthOrgId) {
-		this.healthOrgId = healthOrgId;
-	}
-
-	public String getLisenceKey() {
-		return this.lisenceKey;
-	}
-
-	public void setLisenceKey(String lisenceKey) {
-		this.lisenceKey = lisenceKey;
-	}
-
-	public String getOrgName() {
-		return this.orgName;
-	}
-
-	public void setOrgName(String orgName) {
-		this.orgName = orgName;
-	}
-
-	public Member getMember() {
-		return this.member;
-	}
-
-	public void setMember(Member member) {
-		this.member = member;
-	}
-
-	public List<HealthOrganization> getHealthOrganizations1() {
-		return this.healthOrganizations1;
-	}
-
-	public void setHealthOrganizations1(List<HealthOrganization> healthOrganizations1) {
-		this.healthOrganizations1 = healthOrganizations1;
-	}
-
-	public List<HealthOrganization> getHealthOrganizations2() {
-		return this.healthOrganizations2;
-	}
-
-	public void setHealthOrganizations2(List<HealthOrganization> healthOrganizations2) {
-		this.healthOrganizations2 = healthOrganizations2;
-	}
+	private MemberDetail memberDetails;
+	private OrganganizationInterest organizationInterest;
+	// expansion activities
+	private List<String> requestedPartnerIds; // ids to whom partner request is sent
+	private List<String> partnerOrganzationIds; // accepted requests
+	private List<String> receivedPartnerRequestIds;// requests received waiting for acceptance
+	
+	//profile Related
+	private List<Blood> bloods;
+	private List<EntityPreference> entityPreferences;
+// Details to be filed while Entity has been donated
+private List<DonationEntityDetails>donationEntityDetails;
+// details to be filed while and entity has been received
+private List<ReceivedEntityDetails> ReceivedEntityDetails;
 
 }

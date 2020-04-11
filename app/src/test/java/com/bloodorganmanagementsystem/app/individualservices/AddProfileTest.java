@@ -24,6 +24,7 @@
 //     @Test
 //     public void successTest() {
 //         try {
+//             profile= new Profile();
 //             profile.setBloodType(1);
 //             profile.setBloodUnits(13);
 //             profile.setDateOfBirth(new Date());
