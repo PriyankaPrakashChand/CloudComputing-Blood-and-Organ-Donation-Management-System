@@ -12,7 +12,7 @@
 	<artifactId>app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>app</name>
-	<description>This app facilitates blood and organ bank services to hospitals, organ banks, and blood banks (members of the healthcare community) and will be deployed on Microsoft Azure.</description>
+	<description>Demo project for Spring Boot</description>
 
 	<properties>
 		<java.version>13</java.version>
@@ -20,8 +20,11 @@
 	</properties>
 
 	<dependencies>
-
 	<dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
     <groupId>com.microsoft.azure</groupId>
     <artifactId>azure-cosmosdb-spring-boot-starter</artifactId>
 </dependency>
@@ -30,11 +33,6 @@
 			<artifactId>azure-spring-boot-starter</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -45,6 +43,11 @@
 					<artifactId>junit</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+        <dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 
@@ -57,6 +60,7 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+            
 		</dependencies>
 	</dependencyManagement>
 
@@ -70,3 +74,7 @@
 	</build>
 
 </project>
+
+
+
+

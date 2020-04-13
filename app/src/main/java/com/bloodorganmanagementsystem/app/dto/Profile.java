@@ -1,6 +1,11 @@
 package com.bloodorganmanagementsystem.app.dto;
 
+import com.bloodorganmanagementsystem.app.entities.Blood;
+import com.bloodorganmanagementsystem.app.entities.Tests;
+import com.bloodorganmanagementsystem.app.entities.Individual.DonationPreference;
+
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -11,7 +16,11 @@ public class Profile {
     Date dateOfBirth;
     Integer height;
     Integer weight;
-    Integer bloodType;
-    Integer BloodUnits;
+    Blood blood;
+    List<DonationPreference> donationPreferences;
+    List<Tests>tests;
+    
+    
+	
     
 }

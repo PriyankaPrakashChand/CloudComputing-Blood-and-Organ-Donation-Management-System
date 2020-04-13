@@ -1,14 +1,18 @@
- package com.bloodorganmanagementsystem.app.repository;
+package com.bloodorganmanagementsystem.app.repository;
 
 import com.bloodorganmanagementsystem.app.entities.Individual;
+import com.microsoft.azure.spring.data.cosmosdb.repository.CosmosRepository;
 
+import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IndividualRepository extends CrudRepository<Individual, String> {
+public interface IndividualRepository extends CosmosRepository<Individual, String> {
 
-public 	Optional<Individual>findById(String Id);
+public Optional<Individual> findById(String id);
+public  List<Individual> findByEmail(String email);
+
+
 }

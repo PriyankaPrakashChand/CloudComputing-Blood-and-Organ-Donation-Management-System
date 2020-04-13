@@ -7,11 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 
-@EntityScan(basePackages = {"com.bloodorganmanagementsystem.app.entities"})
+@ComponentScan(basePackages = {"com.bloodorganmanagementsystem.app.entities"})
 @ComponentScan(basePackages = {"com.bloodorganmanagementsystem.app.service"})
 @ComponentScan(basePackages = {"com.bloodorganmanagementsystem.app.controller"})
 @ComponentScan(basePackages = {"com.bloodorganmanagementsystem.app.configration"})
-@EnableCosmosRepositories(basePackages = {"com.bloodorganmanagementsystem.app.repository"})
+// @EnableCosmosRepositories(basePackages = {"com.bloodorganmanagementsystem.app.repository"})
 @SpringBootApplication
 public class AppApplication {
 

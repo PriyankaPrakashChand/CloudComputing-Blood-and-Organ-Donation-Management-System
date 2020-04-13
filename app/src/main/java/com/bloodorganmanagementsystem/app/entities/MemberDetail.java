@@ -20,8 +20,6 @@ public class MemberDetail {
 
 	private String country;
 
-	private String email; // unique
-
 	private String password; 
 
 	private String phoneNumber; // unique
