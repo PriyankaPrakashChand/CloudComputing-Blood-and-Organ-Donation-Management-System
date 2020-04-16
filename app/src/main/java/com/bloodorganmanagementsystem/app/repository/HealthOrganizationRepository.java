@@ -12,5 +12,9 @@ import org.springframework.stereotype.Repository;
 public interface HealthOrganizationRepository extends CosmosRepository<HealthOrganization, String> {
 
     public List<HealthOrganization> findByLisenceKey(String lisenceKey); 
-   
+    public Optional<Individual> findById(String id);
+    public  List<Individual> findByEmail(String email);
+
+
+
 }

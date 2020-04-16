@@ -63,6 +63,7 @@ public enum OrganizationInterest {
 		op.add(OrganizationInterest.NULL);
 		this.organizationInterest = oP;
 		
+		
 
 
 
