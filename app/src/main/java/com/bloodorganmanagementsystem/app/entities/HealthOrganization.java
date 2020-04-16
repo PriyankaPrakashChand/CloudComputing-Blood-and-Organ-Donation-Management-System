@@ -21,17 +21,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class HealthOrganization {
 
+	
+public enum OrganizationInterest {
+	RECEIVE, DONATE, BOTH
+}
+
 	@Id // registeration
 	private String id;
 	@PartitionKey
-	private String lisenceKey;
+	private String email; // unique
+	private String lisenceKey; // unique
 	private String orgName;
 	private MemberDetail memberDetails;
-	private OrganizationInterest organizationInterest;
 	// expansion activities
 	private List<String> requestedPartnerIds; // ids to whom partner request is sent
 	private List<String> partnerOrganzationIds; // accepted requests
 	private List<String> receivedPartnerRequestIds;// requests received waiting for acceptance
+	private List<OrganizationInterest> organizationInterest;
+
 
 	// profile Related
 	private List<Blood> bloods;
@@ -40,5 +47,25 @@ public class HealthOrganization {
 	private List<DonationEntityDetails> donationEntityDetails;
 	// details to be filed while and entity has been received
 	private List<ReceivedEntityDetails> ReceivedEntityDetails;
+
+
+	
+	/**
+	 * NoArgsConstructor
+	 */
+	public HealthOrganization() {
+		this.id=UUID.randomUUID().toString();
+		this.lisenceKey.randomUUID().toString();
+		this.email=UUID.randomUUID().toString();
+		this.orgName="";
+		this.memeberDetails = new MemberDetail("", "", "", "", "");
+		List<OrganizationInterest> oP = new ArrayList<OrganizationInterest>();
+		op.add(OrganizationInterest.NULL);
+		this.organizationInterest = oP;
+		
+
+
+
+	}
 
 }
