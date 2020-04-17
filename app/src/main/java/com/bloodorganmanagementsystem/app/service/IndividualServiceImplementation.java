@@ -66,6 +66,22 @@ public class IndividualServiceImplementation implements IndividualService {
 
        // 3-check that patient is between 18-65 years in age
 
+	Individual ind = dbIndividualList.get();
+       Date d = ind.getBirthday();
+       Calendar c = Calendar.getInstance();
+       c.setTime(d);
+       int year = c.get(Calendar.YEAR);
+       int month = c.get(Calendar.MONTH) + 1;
+       int date = c.get(Calendar.DATE);
+       LocalDate l1 = LocalDate.of(year, month, date);
+       LocalDate now1 = LocalDate.now();
+       Period diff1 = Period.between(l1, now1);
+       int age = diff1.getYears();
+       
+       if(age < 18 || age > 65) {
+           throw new AppException("The user is not of suitable age to be a Donor");
+       }
+	    
        //4-check that firstname,lasnameand password address,city and country is not empty
        int minimumHeight=25;
        int minimumWeight=45;
