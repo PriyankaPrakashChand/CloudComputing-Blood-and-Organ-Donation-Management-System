@@ -1,6 +1,8 @@
 package com.bloodorganmanagementsystem.app.entities;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.bloodorganmanagementsystem.app.entities.enums.EntityPreference;
 import com.bloodorganmanagementsystem.app.entities.enums.OrganizationInterest;
@@ -18,12 +20,12 @@ import lombok.NoArgsConstructor;
 @Data
 @Component
 @AllArgsConstructor
-@NoArgsConstructor
+
 public class HealthOrganization {
 
 	
 public enum OrganizationInterest {
-	RECEIVE, DONATE, BOTH
+	NULL, RECEIVE, DONATE, BOTH
 }
 
 	@Id // registeration
@@ -55,12 +57,12 @@ public enum OrganizationInterest {
 	 */
 	public HealthOrganization() {
 		this.id=UUID.randomUUID().toString();
-		this.lisenceKey.randomUUID().toString();
+		this.lisenceKey=UUID.randomUUID().toString();
 		this.email=UUID.randomUUID().toString();
 		this.orgName="";
-		this.memeberDetails = new MemberDetail("", "", "", "", "");
+		this.memberDetails = new MemberDetail("", "", "", "", "");
 		List<OrganizationInterest> oP = new ArrayList<OrganizationInterest>();
-		op.add(OrganizationInterest.NULL);
+		oP.add(OrganizationInterest.NULL);
 		this.organizationInterest = oP;
 		
 		

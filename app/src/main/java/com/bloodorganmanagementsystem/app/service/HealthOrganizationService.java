@@ -1,10 +1,13 @@
 package com.bloodorganmanagementsystem.app.service;
+
 import java.util.List;
 import java.util.Optional;
 
 import com.bloodorganmanagementsystem.app.dto.Donation;
 import com.bloodorganmanagementsystem.app.dto.IndividualDetails;
 import com.bloodorganmanagementsystem.app.dto.Profile;
+import com.bloodorganmanagementsystem.app.entities.DonationEntityDetails;
+import com.bloodorganmanagementsystem.app.entities.HealthOrganization;
 import com.bloodorganmanagementsystem.app.entities.Individual;
 import com.bloodorganmanagementsystem.app.entities.Tests;
 

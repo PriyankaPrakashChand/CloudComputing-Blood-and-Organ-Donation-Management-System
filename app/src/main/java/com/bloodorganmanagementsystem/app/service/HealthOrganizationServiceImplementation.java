@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 import com.bloodorganmanagementsystem.app.dto.Donation;
 import com.bloodorganmanagementsystem.app.dto.IndividualDetails;
 import com.bloodorganmanagementsystem.app.dto.Profile;
+import com.bloodorganmanagementsystem.app.entities.DonationEntityDetails;
 import com.bloodorganmanagementsystem.app.entities.HealthOrganization;
 import com.bloodorganmanagementsystem.app.entities.Individual;
 import com.bloodorganmanagementsystem.app.repository.HealthOrganizationRepository;
@@ -31,11 +32,8 @@ import lombok.Setter;
 @Data
 public class HealthOrganizationServiceImplementation implements HealthOrganizationService {
 
-
     IndividualRepository indRepos;
     HealthOrganizationRepository orgRepos;
-
-
 
     /**
      * Public Constructor
@@ -44,85 +42,83 @@ public class HealthOrganizationServiceImplementation implements HealthOrganizati
      * @param orgRepos
      */
     @Autowired
-    public HealthOrganizationServiceImplementation(IndividualRepository indRepos, HealthOrganizationRepository orgRepos) {
+    public HealthOrganizationServiceImplementation(IndividualRepository indRepos,
+            HealthOrganizationRepository orgRepos) {
         this.indRepos = indRepos;
         this.orgRepos = orgRepos;
     }
 
     @Override
     public Optional<HealthOrganization> findById(String findId) {
-        // check if this is correct 
-        final Optional<UsHealthOrganizationer> result = HealthOrganizationRepository.findById(findId).blockOptional();
-        Assert.isTrue(result.isPresent(), "Cannot find "); // assert check if not find and throw an error  
-
-
-        return result;
+        // TODO Auto-generated method stub
+        //  check if this is correct
+        Optional<HealthOrganization> dbHealthOrganization = orgRepos.findById(findId);
+        
+        
+        return dbHealthOrganization;
+        
     }
 
     @Override
-    public boolean Register(HealthOrganization healthOrganization throws AppException {
-       // 1-check if email is unique
-       List<HealthOrganization> dbHealthOrganizationList=HealthOrganizationRepository.findByEmail(HealthOrganization.getEmail());
-       if(!dbHealthOrganizationList.isEmpty()){
-           throw new AppException("Email Id Already Exists");
-       }
-    // 2- check name , password , city , country  is not empty 
+    public boolean Register(HealthOrganization healthOrganization) throws AppException {
+        // TODO Auto-generated method stub
 
-       int minimumHeight=25;
-       int minimumWeight=45;
-       int minimumPasswordLength=8;
-    
-       if(HealthOrganization.getorgNmae().isBlank() || HealthOrganization.getMemeberDetails().getAddress().isBlank() ||HealthOrganization.getMemeberDetails().getCity().isBlank()|| HealthOrganization.getMemeberDetails().getCity().isBlank()||
-       HealthOrganization.getMemeberDetails().getPhoneNumber().isBlank()|| HealthOrganization.getMemeberDetails().getPassword().length()<minimumPasswordLength){
-        throw new AppException("No fields must be Left Incomplete");
-       }
-       
-       //3- save individual to repository
-      try{ 
-        HealthOrganization  ho= HealthOrganizationRepository.save(HealthOrganization);
+        // 1-check if email is unique
+        List<HealthOrganization> dbHealthOrganizationList = orgRepos.findByEmail(healthOrganization.getEmail());
+                
+        if (!dbHealthOrganizationList.isEmpty()) {
+            throw new AppException("Email Id Already Exists");
         }
-      catch(Exception e){
-        System.out.println(e.getMessage());
-      }
+        // 2- check name , password , city , country is not empty
+
+        int minimumHeight = 25;
+        int minimumWeight = 45;
+        int minimumPasswordLength = 8;
+
+        if (healthOrganization.getOrgName().isBlank() || healthOrganization.getMemberDetails().getAddress().isBlank()
+                || healthOrganization.getMemberDetails().getCity().isBlank()
+                || healthOrganization.getMemberDetails().getCity().isBlank()
+                || healthOrganization.getMemberDetails().getPhoneNumber().isBlank()
+                || healthOrganization.getMemberDetails().getPassword().length() < minimumPasswordLength) {
+            throw new AppException("No fields must be Left Incomplete");
+        }
+
+        // 3- save individual to repository
+        try {
+            healthOrganization  = orgRepos.save(healthOrganization);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         return true;
+        
     }
 
     @Override
     public boolean Login(String email, String password) throws AppException {
-
-        // we need check if it is valid
+        // TODO Auto-generated method stub
         return false;
     }
 
-    public List<Individual> viewAllDonor( )
-    {
-            // return list of all individual if they donate
-
-            return null;
-    } 
-
-    public List<Individual> viewAllDonorbyTypr( String donation_type )
-    {
-
+    @Override
+    public List<DonationEntityDetails> viewDonationsEntities() {
+        // TODO Auto-generated method stub
         return null;
     }
-    
+
+    @Override
+    public List<Individual> viewAllDonorbyTypr(String donation_type) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<Individual> viewAllDonor() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 
+ 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
 }
