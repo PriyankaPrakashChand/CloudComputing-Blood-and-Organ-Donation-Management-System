@@ -1,6 +1,8 @@
 package com.bloodorganmanagementsystem.app.service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -66,8 +68,8 @@ public class IndividualServiceImplementation implements IndividualService {
 
        // 3-check that patient is between 18-65 years in age
 
-	Individual ind = dbIndividualList.get();
-       Date d = ind.getBirthday();
+	
+       Date d = individual.getBirthday();
        Calendar c = Calendar.getInstance();
        c.setTime(d);
        int year = c.get(Calendar.YEAR);
@@ -78,9 +80,9 @@ public class IndividualServiceImplementation implements IndividualService {
        Period diff1 = Period.between(l1, now1);
        int age = diff1.getYears();
        
-       if(age < 18 || age > 65) {
-           throw new AppException("The user is not of suitable age to be a Donor");
-       }
+    //    if(age < 18 || age > 65) {
+    //        throw new AppException("The user is not of suitable age to be a Donor");
+    //    }
 	    
        //4-check that firstname,lasnameand password address,city and country is not empty
        int minimumHeight=25;
@@ -98,7 +100,7 @@ public class IndividualServiceImplementation implements IndividualService {
        
        //5- save individual to repository
       try{ 
-          Individual  ind= indRepos.save(individual);
+          individual= indRepos.save(individual);
         }
       catch(Exception e){
         System.out.println(e.getMessage());

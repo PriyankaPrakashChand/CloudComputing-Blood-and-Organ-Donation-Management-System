@@ -33,12 +33,12 @@ public class RegisterationTest {
     IndividualServiceImplementation indSer;
     @Autowired
     IndividualRepository repos;
-
+    Individual ind;
     @Test
     public void successTest() {
 
         try {
-            Individual ind;
+          
             Optional<Individual> dbIndividual = repos.findById("I001");
             if (dbIndividual.isPresent()) {
                 repos.delete(dbIndividual.get());
@@ -56,6 +56,7 @@ public class RegisterationTest {
             ind.setFirstName("IndivisualFirstName");
             ind.setLastName("IndivisualLastName");
             ind.setAppliedLicenseKey("Org1LicenceKey");
+
             ind.setBirthday(new Date());
             ind.setBloodDetails(blood);
             ind.setHeightCm(134);
