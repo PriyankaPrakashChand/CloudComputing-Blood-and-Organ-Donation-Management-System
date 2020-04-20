@@ -2,7 +2,7 @@ package com.bloodorganmanagementsystem.app.controller;
 
 import javax.websocket.server.PathParam;
 
-import com.bloodorganmanagementsystem.app.dto.Profile;
+import com.bloodorganmanagementsystem.app.dto.IndividualProfileToShow;
 import com.bloodorganmanagementsystem.app.entities.Individual;
 import com.bloodorganmanagementsystem.app.service.AppException;
 import com.bloodorganmanagementsystem.app.service.IndividualService;
@@ -33,7 +33,7 @@ public class IndividualController {
 	}
 
 	@GetMapping("ViewProfile/{individualId}")
-	public Profile getProfile(@PathVariable String individualId) {
+	public IndividualProfileToShow getProfile(@PathVariable String individualId) {
 
 		try {
 			return individualService.viewProfile(individualId);

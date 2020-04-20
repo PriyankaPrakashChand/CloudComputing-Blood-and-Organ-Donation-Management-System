@@ -13,15 +13,15 @@ import lombok.NoArgsConstructor;
 // @Entity
 public class DonationEntityDetails {
 	public enum EntityName { // or type
-		BLOOD, BONE_MARROW, EYES, HEART, KIDNEY, LIVER
+		NULL, BLOOD, BONE_MARROW, EYES, HEART, KIDNEY, LIVER
 	}
 
 	public enum dState {
-		AVAILABLE_TO_DONATE, HAS_BEEN_DONATED
+		NULL, AVAILABLE_TO_DONATE, HAS_BEEN_DONATED
 	}
 
 	public enum ReceiverType {
-		INDIVIDUAL, ORGANIZATION
+		NULL, INDIVIDUAL, ORGANIZATION
 	}
 	private EntityName entityName;
 	private dState state;

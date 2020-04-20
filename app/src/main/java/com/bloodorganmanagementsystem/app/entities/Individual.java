@@ -25,6 +25,9 @@ public class Individual {
 	public enum DonationPreference {
 		NULL,BLOOD, BONE_MARROW, EYES, HEART, KIDNEY, LIVER
 	}
+	public enum Gender{
+		NULL, MALE, FEMALE
+	}
 
 	// public enum BloodType {
 	// NULL, A_POSITIVE, A_NEGATIVE, B_NEGATIVE, B_POSITIVE, O_POSITIVE, O_NEGATIVE,
@@ -35,7 +38,7 @@ public class Individual {
 	String id;
 	@PartitionKey
 	private String email; // unique
-
+	private String password;
 	private String appliedLicenseKey;
 	private MemberDetail memeberDetails;
 	private Date birthday;
@@ -43,7 +46,7 @@ public class Individual {
 	private String lastName;
 	// Profile-to add/modivy and view
 	// @PartitionKey
-	private Character gender;
+	private Gender gender;
 	private Integer heightCm;
 	private Integer weightKg;
 	private Blood bloodDetails;
@@ -58,6 +61,7 @@ public class Individual {
 	 */
 	public Individual() {
 		this.id=UUID.randomUUID().toString();
+		this.password=new String(""); //F:should I keep it like this?
 		this.email=UUID.randomUUID().toString();
 		this.memeberDetails = new MemberDetail("", "", "", "", "");
 		this.bloodDetails = new Blood(BloodType.NULL);
@@ -66,7 +70,7 @@ public class Individual {
 		List<DonationPreference> dP = new ArrayList<DonationPreference>();
 		dP.add(DonationPreference.NULL);
 		this.donationPreference=dP;
-		this.gender='_';
+		this.gender=Gender.NULL;
 		this.heightCm=-1;
 		this.weightKg=-1;
 		List<Tests> testList = new ArrayList<Tests>();
@@ -74,6 +78,13 @@ public class Individual {
 		DonationEntityDetails dE = new DonationEntityDetails();
 		List<DonationEntityDetails> dEs = new ArrayList<DonationEntityDetails>();
 		this.donationEntityDetails=dEs;
+	}
+	
+	public void addTest(Tests test) {
+		testDetails.add(test);
+	}
+	public void removeTest(Tests test) {
+		testDetails.remove(test);
 	}
 
 }

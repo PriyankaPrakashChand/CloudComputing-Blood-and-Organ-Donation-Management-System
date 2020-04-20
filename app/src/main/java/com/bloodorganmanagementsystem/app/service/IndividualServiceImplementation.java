@@ -1,5 +1,5 @@
 package com.bloodorganmanagementsystem.app.service;
-
+import com.bloodorganmanagementsystem.app.entities.Tests.TestName;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
@@ -11,10 +11,13 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import com.bloodorganmanagementsystem.app.dto.Donation;
+import com.bloodorganmanagementsystem.app.dto.DonationFromIndividual;
 import com.bloodorganmanagementsystem.app.dto.IndividualDetails;
-import com.bloodorganmanagementsystem.app.dto.Profile;
+import com.bloodorganmanagementsystem.app.dto.IndividualProfileToGet;
+import com.bloodorganmanagementsystem.app.dto.IndividualProfileToShow;
 import com.bloodorganmanagementsystem.app.entities.HealthOrganization;
 import com.bloodorganmanagementsystem.app.entities.Individual;
+import com.bloodorganmanagementsystem.app.entities.Tests;
 import com.bloodorganmanagementsystem.app.repository.HealthOrganizationRepository;
 import com.bloodorganmanagementsystem.app.repository.IndividualRepository;
 
@@ -108,29 +111,35 @@ public class IndividualServiceImplementation implements IndividualService {
         return true;
     }
 
+    //F: login function complete
     @Override
     public boolean Login(String email, String password) throws AppException {
         // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean addTest(String individualId, Integer testId, Integer testValue, String licenseKey)
-            throws AppException {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean AddProfile(String individualId, Profile profile, String licenseKey) throws AppException {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean Donate(long donationEntityTypeId, String individualId, String licenceKey) throws AppException {
-        // TODO Auto-generated method stub
-        return false;
+    	
+    	// 1- check if email exists
+    	try {
+    	List<Individual> dbIndividual = indRepos.findByEmail(email);
+    	
+        if (dbIndividual.isEmpty()||dbIndividual.size()>1) {
+            throw new AppException("Individual does not exist. Email not found.");
+        }
+        
+        Individual individual= dbIndividual.get(0);
+        
+        // 2- check if password matches
+        String indPassword = individual.getMemeberDetails().getPassword();
+        if(!indPassword.equals(password)) {
+        	throw new AppException("Incorrect Password.");
+        }
+        
+        return true;
+    	
+        }
+    	
+    	catch (Exception e){
+    		System.out.println(e.getMessage());
+            return false;	
+    	}
     }
 
     @Override
@@ -171,9 +180,13 @@ public class IndividualServiceImplementation implements IndividualService {
     // return false;
     // }
 
-    // @Override
-    // public boolean AddProfile(final String individualId, final Profile profile,
-    // String licenseKey) throws AppException {
+     public boolean AddProfile(final String individualId,  IndividualProfileToShow profile,
+     String licenseKey) throws AppException {
+    	 
+    	 
+    	 
+    	 
+		return false;
     // if (profile.getBloodType() == null || profile.getBloodUnits() == null ||
     // profile.getHeight() == null|| profile.getWeight()==null
     // ||profile.getDateOfBirth()==null||profile.getGender()==0) {
@@ -190,7 +203,7 @@ public class IndividualServiceImplementation implements IndividualService {
     // // 2check if licency key belongs to individual
     // if (!licenseKey.equals(individual.getAppliedLicenseKey())) {
     // throw new AppException("Invalid licence Key");
-    // }
+     }
 
     // // 3validate height
     // Integer minimumHeight = 0;
@@ -374,14 +387,14 @@ public class IndividualServiceImplementation implements IndividualService {
      * @throws AppException
      */
     @Override
-    public Profile viewProfile(final String individualId) throws AppException {
+    public IndividualProfileToShow viewProfile(final String individualId) throws AppException {
         try {
             final Optional<Individual> dbIndividual = indRepos.findById(individualId);
             if (dbIndividual.isEmpty()) {
                 throw new AppException("Individual does not exist");
             }
          Individual individual= dbIndividual.get();
-            Profile profile = new Profile();
+            IndividualProfileToShow profile = new IndividualProfileToShow();
 			profile.setBlood(individual.getBloodDetails());
 			profile.setDateOfBirth(individual.getBirthday());
 			profile.setGender(individual.getGender());
@@ -395,5 +408,62 @@ public class IndividualServiceImplementation implements IndividualService {
             throw e;
         }
     }
+
+	@Override
+	public boolean addTest(String individualId, Tests test, String licenseKey) throws AppException {
+		// TODO Auto-generated method stub
+		
+		try {
+//		1-	check ind id exist (optional ind isPresent() from repository)
+		Optional<Individual> dbIndividual = indRepos.findById(individualId);
+				
+//		2-	check ifEmpty() -> return error app exception class
+		if(dbIndividual.isEmpty()) {
+			throw new AppException("Individual does not exist");
+		}
+		
+		Individual individual = dbIndividual.get();
+		
+//		3-	license key should be equal to ind previously set key
+		if(!individual.getAppliedLicenseKey().equals(licenseKey)) {
+			throw new AppException("Individual not valid");
+		}
+		
+//		4-  check test name is not null
+		if(test == null || test.getTestName().equals(TestName.NULL)) {
+			throw new AppException("Cannot have empty test");
+		}
+		
+//		5- 	date of last update -> create new date.
+		test.setDateOFLastUpdate(new Date());
+		
+//		6- Add test to individual
+		individual.addTest(test);
+		
+//		7- Update database
+		individual = indRepos.save(individual);
+		
+		return true;
+		
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+}
+
+	@Override
+	public boolean AddProfile(String individualId, IndividualProfileToGet profile, String licenseKey)
+			throws AppException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean Donate(DonationFromIndividual donationFromIndividual, String individualId, String licenceKey)
+			throws AppException {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

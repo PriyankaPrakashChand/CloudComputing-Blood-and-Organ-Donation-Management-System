@@ -12,7 +12,5 @@ import org.springframework.stereotype.Repository;
 public interface IndividualRepository extends CosmosRepository<Individual, String> {
 
 public Optional<Individual> findById(String id);
-public  List<Individual> findByEmail(String email);
-
-
+public  List<Individual> findByEmail(String email); 
 }

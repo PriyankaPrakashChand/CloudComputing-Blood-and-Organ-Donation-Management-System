@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 import com.bloodorganmanagementsystem.app.dto.Donation;
 import com.bloodorganmanagementsystem.app.dto.IndividualDetails;
-import com.bloodorganmanagementsystem.app.dto.Profile;
+import com.bloodorganmanagementsystem.app.dto.IndividualProfileToShow;
 import com.bloodorganmanagementsystem.app.entities.DonationEntityDetails;
 import com.bloodorganmanagementsystem.app.entities.HealthOrganization;
 import com.bloodorganmanagementsystem.app.entities.Individual;

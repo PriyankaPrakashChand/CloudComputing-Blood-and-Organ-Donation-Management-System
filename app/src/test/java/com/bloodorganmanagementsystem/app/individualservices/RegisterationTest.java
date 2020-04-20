@@ -16,6 +16,7 @@ import com.bloodorganmanagementsystem.app.entities.DonationEntityDetails.Receive
 import com.bloodorganmanagementsystem.app.entities.DonationEntityDetails.dState;
 import com.bloodorganmanagementsystem.app.entities.Individual.DonationPreference;
 import com.bloodorganmanagementsystem.app.repository.IndividualRepository;
+import com.bloodorganmanagementsystem.app.service.AppException;
 import com.bloodorganmanagementsystem.app.service.IndividualServiceImplementation;
 import com.bloodorganmanagementsystem.app.entities.Tests;
 
@@ -56,7 +57,7 @@ public class RegisterationTest {
             ind.setFirstName("IndivisualFirstName");
             ind.setLastName("IndivisualLastName");
             ind.setAppliedLicenseKey("Org1LicenceKey");
-
+            ind.setEmail("HarryPotter@email.com");
             ind.setBirthday(new Date());
             ind.setBloodDetails(blood);
             ind.setHeightCm(134);
@@ -70,26 +71,11 @@ public class RegisterationTest {
         }
 
     }
+    /*
+    public void loginSuccessTest() throws AppException {
+    	
+    	assert (indSer.Login(ind.getEmail(), ind.getPassword())== true);
+    }
+*/
 
 }
-
-// // blood.setBloodUnitsAvailable(new BigDecimal("13.9"));
-// // blood.setBloodUnitsDonated(new BigDecimal("10.8"));
-
-// ind.setFirstName("IndivisualFirstName");
-// ind.setLastName("IndivisualLastName");
-// ind.setAppliedLicenseKey("Org1LicenceKey");
-// ind.setBirthday(new Date());
-// ind.setBloodDetails(blood);
-// List<DonationPreference> dP= new ArrayList<DonationPreference>();
-// dP.add(DonationPreference.BLOOD);
-// ind.setDonationPreference(dP);
-// ind.setGender('F');
-// ind.setHeightCm(134);
-// ind.setWeightKg(72);
-// List<Tests>testList= new ArrayList<Tests>();
-// Tests test= new Tests();
-// test.setDateOFLastUpdate(new Date());
-// test.setHasPassed(true);
-// testList.add(test);
-// ind.setTestDetails(testList)

@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import com.bloodorganmanagementsystem.app.dto.Donation;
+import com.bloodorganmanagementsystem.app.dto.DonationFromIndividual;
 import com.bloodorganmanagementsystem.app.dto.IndividualDetails;
-import com.bloodorganmanagementsystem.app.dto.Profile;
+import com.bloodorganmanagementsystem.app.dto.IndividualProfileToGet;
+import com.bloodorganmanagementsystem.app.dto.IndividualProfileToShow;
 import com.bloodorganmanagementsystem.app.entities.Individual;
 import com.bloodorganmanagementsystem.app.entities.Tests;
 
@@ -20,7 +22,7 @@ public interface IndividualService {
 
     public boolean Login(String email, String password)throws AppException;
 
-    public boolean addTest(String individualId, Integer testId, Integer testValue,String licenseKey) throws AppException;
+    public boolean addTest(String individualId, Tests test, String licenseKey) throws AppException;
 
     /**
      * 
@@ -30,12 +32,14 @@ public interface IndividualService {
      * @return
      * @throws AppException
      */
-    public boolean AddProfile(String individualId, Profile profile,String licenseKey) throws AppException;
+    public boolean AddProfile(String individualId, IndividualProfileToGet profile,String licenseKey) throws AppException;
 
-    public boolean Donate(long donationEntityTypeId, String individualId, String licenceKey) throws AppException;
+    public boolean Donate(DonationFromIndividual donationFromIndividual, String individualId, String licenceKey) throws AppException;
 
     public List<Donation> viewDonations(String individualId) throws AppException;
 
-    public Profile viewProfile(String individualId) throws AppException;
+    public IndividualProfileToShow viewProfile(String individualId) throws AppException;
+
+	boolean AddProfile(String individualId, IndividualProfileToShow profile, String licenseKey) throws AppException;
 
 }

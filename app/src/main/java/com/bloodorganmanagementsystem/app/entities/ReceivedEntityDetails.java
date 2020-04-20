@@ -13,13 +13,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReceivedEntityDetails {
 	public enum rState {
-		WAITING_TO_BE_RECEIVED, HAS_BEEN_RECEIVED
+		NULL, WAITING_TO_BE_RECEIVED, HAS_BEEN_RECEIVED
 	}
 	public enum ReceiverType {
-		INDIVIDUAL, ORGANIZATION
+		NULL, INDIVIDUAL, ORGANIZATION
 	}
 	public enum EntityName { // or type 
-		BLOOD,BONE_MARROW,EYES,HEART,KIDNEY,LIVER
+		NULL, BLOOD,BONE_MARROW,EYES,HEART,KIDNEY,LIVER
 	}
 	private EntityName entityName;
 	private String DonorId;
