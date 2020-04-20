@@ -44,8 +44,6 @@ public class Individual {
 	private Date birthday;
 	private String firstName;
 	private String lastName;
-	// Profile-to add/modivy and view
-	// @PartitionKey
 	private Gender gender;
 	private Integer heightCm;
 	private Integer weightKg;

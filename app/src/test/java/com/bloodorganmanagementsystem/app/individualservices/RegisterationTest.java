@@ -35,11 +35,12 @@ public class RegisterationTest {
     @Autowired
     IndividualRepository repos;
     Individual ind;
+
     @Test
     public void successTest() {
-
+     
         try {
-          
+
             Optional<Individual> dbIndividual = repos.findById("I001");
             if (dbIndividual.isPresent()) {
                 repos.delete(dbIndividual.get());
@@ -57,12 +58,11 @@ public class RegisterationTest {
             ind.setFirstName("IndivisualFirstName");
             ind.setLastName("IndivisualLastName");
             ind.setAppliedLicenseKey("Org1LicenceKey");
-            ind.setEmail("HarryPotter@email.com");
             ind.setBirthday(new Date());
             ind.setBloodDetails(blood);
             ind.setHeightCm(134);
             ind.setWeightKg(72);
-
+            ind.setEmail("HarryPotter@email.com");
             ind.setId("I001");
 
             assert (indSer.Register(ind) == true);
@@ -71,11 +71,16 @@ public class RegisterationTest {
         }
 
     }
-    /*
+
+    @Test
     public void loginSuccessTest() throws AppException {
-    	
-    	assert (indSer.Login(ind.getEmail(), ind.getPassword())== true);
+
+try{
+    Boolean result=indSer.Login(ind.getEmail(), ind.getMemeberDetails().getPassword());
+        assert (result == true);
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
     }
-*/
+    }
 
 }
