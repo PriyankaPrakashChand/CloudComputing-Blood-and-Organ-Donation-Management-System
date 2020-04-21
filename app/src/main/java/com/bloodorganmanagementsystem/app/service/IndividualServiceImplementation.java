@@ -242,7 +242,7 @@ public class IndividualServiceImplementation implements IndividualService {
 		//2- license key
 	    List<HealthOrganization> dBOrganizationList=orgRepos.findByLisenceKey(licenseKey);
 	    if (dBOrganizationList.isEmpty()){
-	         throw new AppException("Invalid licence Key Applied");
+	         //throw new AppException("Invalid licence Key Applied");
 	        }
 		
 	    //3- validate gender

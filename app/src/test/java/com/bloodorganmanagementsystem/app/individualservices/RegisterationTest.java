@@ -41,10 +41,7 @@ public class RegisterationTest {
 
     @Before
     public void init() {
-        Optional<Individual> dbIndividual = repos.findById("I001");
-        if (dbIndividual.isPresent()) {
-            repos.delete(dbIndividual.get());
-        }
+        
         ind = new Individual();
         MemberDetail memberDetail = new MemberDetail();
         memberDetail.setAddress("address");
@@ -64,14 +61,7 @@ public class RegisterationTest {
         ind.setWeightKg(72);
         ind.setEmail("HarryPotter@email.com");
         ind.setId("I001");
-        //ind.setGender(Gender.MALE);
-        
-        profile = new IndividualProfileToGet();
-        profile.setBlood(ind.getBloodDetails());
-        profile.setDonationPreferences(ind.getDonationPreference());
-        profile.setGender(ind.getGender());
-        profile.setHeight(ind.getHeightCm());
-        profile.setWeight(ind.getWeightKg());
+       
     	
     }
     
@@ -79,6 +69,10 @@ public class RegisterationTest {
     public void successTest() {
      
         try {   
+            Optional<Individual> dbIndividual = repos.findById("I001");
+        if (dbIndividual.isPresent()) {
+            repos.delete(dbIndividual.get());
+        }
             
             assert (indSer.Register(ind) == true);
         } catch (Exception e) {
@@ -101,7 +95,7 @@ try{
     @Test
     public void AddProfileTest() throws AppException{
     	//try {
-    		IndividualProfileToGet profile2 = new IndividualProfileToGet();
+    		profile = new IndividualProfileToGet();
 
     		List<DonationPreference> listOfDonationPref = new ArrayList<DonationPreference>();
     		Blood newBlood = new Blood();
@@ -112,13 +106,13 @@ try{
     		newBlood.setBloodUnitsAvailable(25);
     		newBlood.setBloodUnitsDonated(30);
     		
-    		profile2.setBlood(newBlood);
-    		profile2.setDonationPreferences(listOfDonationPref);
-    		profile2.setGender(Gender.MALE);
-    		profile2.setHeight(170);
-    		profile2.setWeight(65);
+    		profile.setBlood(newBlood);
+    		profile.setDonationPreferences(listOfDonationPref);
+    		profile.setGender(Gender.MALE);
+    		profile.setHeight(170);
+    		profile.setWeight(65);
     		
-    		Boolean result=indSer.AddProfile(ind.getId(), profile2,ind.getAppliedLicenseKey());
+    		Boolean result=indSer.AddProfile(ind.getId(), profile,ind.getAppliedLicenseKey());
             assert (result == true);
    // 	}
 //    	catch(Exception e) {
