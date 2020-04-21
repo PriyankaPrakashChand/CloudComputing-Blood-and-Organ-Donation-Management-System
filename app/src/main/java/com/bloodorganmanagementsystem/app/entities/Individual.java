@@ -62,7 +62,7 @@ public class Individual {
 		this.password=new String(""); //F:should I keep it like this?
 		this.email=UUID.randomUUID().toString();
 		this.memeberDetails = new MemberDetail("", "", "", "", "");
-		this.bloodDetails = new Blood(BloodType.NULL);
+		this.bloodDetails = new Blood(BloodType.NULL, 20, 20);
 		this.appliedLicenseKey = this.lastName = this.firstName = "";
 		this.birthday = new Date(0);
 		List<DonationPreference> dP = new ArrayList<DonationPreference>();

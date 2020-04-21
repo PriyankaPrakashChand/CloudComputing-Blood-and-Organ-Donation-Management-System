@@ -40,6 +40,5 @@ public interface IndividualService {
 
     public IndividualProfileToShow viewProfile(String individualId) throws AppException;
 
-	boolean AddProfile(String individualId, IndividualProfileToShow profile, String licenseKey) throws AppException;
 
 }

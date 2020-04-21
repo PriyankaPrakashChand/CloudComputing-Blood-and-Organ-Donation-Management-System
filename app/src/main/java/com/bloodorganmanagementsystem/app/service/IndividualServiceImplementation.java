@@ -17,7 +17,10 @@ import com.bloodorganmanagementsystem.app.dto.IndividualProfileToGet;
 import com.bloodorganmanagementsystem.app.dto.IndividualProfileToShow;
 import com.bloodorganmanagementsystem.app.entities.HealthOrganization;
 import com.bloodorganmanagementsystem.app.entities.Individual;
+import com.bloodorganmanagementsystem.app.entities.Individual.DonationPreference;
+import com.bloodorganmanagementsystem.app.entities.Individual.Gender;
 import com.bloodorganmanagementsystem.app.entities.Tests;
+import com.bloodorganmanagementsystem.app.entities.Blood.BloodType;
 import com.bloodorganmanagementsystem.app.repository.HealthOrganizationRepository;
 import com.bloodorganmanagementsystem.app.repository.IndividualRepository;
 
@@ -38,6 +41,8 @@ public class IndividualServiceImplementation implements IndividualService {
     IndividualRepository indRepos;
     HealthOrganizationRepository orgRepos;
 
+    final int minimumHeight=25;
+    final int minimumWeight=45;
     /**
      * Public Constructor
      * 
@@ -88,8 +93,6 @@ public class IndividualServiceImplementation implements IndividualService {
     //    }
 	    
        //4-check that firstname,lasnameand password address,city and country is not empty
-       int minimumHeight=25;
-       int minimumWeight=45;
        int minimumPasswordLength=8;
        // maybe set a maximum password length too
     
@@ -222,8 +225,71 @@ public class IndividualServiceImplementation implements IndividualService {
 	@Override
 	public boolean AddProfile(String individualId, IndividualProfileToGet profile, String licenseKey)
 			throws AppException {
+				
 		// TODO Auto-generated method stub
-		return false;
+		
+		//1- check Id exists
+		try{ 
+			
+		Optional<Individual> dbIndividual = indRepos.findById(individualId);
+		
+		if(dbIndividual.isEmpty()) {
+			throw new AppException("Individual does not exist");
+		}
+		
+		Individual individual = dbIndividual.get();
+		
+		//2- license key
+	    List<HealthOrganization> dBOrganizationList=orgRepos.findByLisenceKey(licenseKey);
+	    if (dBOrganizationList.isEmpty()){
+	         throw new AppException("Invalid licence Key Applied");
+	        }
+		
+	    //3- validate gender
+		 if(profile.getGender()== Gender.NULL) {
+			throw new AppException("Gender can not be null"); 
+		 }
+		 
+		 //4- validate blood
+		 if(profile.getBlood().getBloodType() == BloodType.NULL) {
+			throw new AppException("blood type cannot be null");
+		 }
+		 
+		 if(profile.getBlood().getBloodUnitsAvailable()<0 || profile.getBlood().getBloodUnitsDonated()<0) {
+				throw new AppException("blood units invalid");
+			 }
+		 
+		 //5-validate height and weight
+		 if(profile.getHeight()<minimumHeight||profile.getWeight()<minimumWeight) {
+				throw new AppException("Height/Weight not allowed");
+		 }
+		 
+		 //6- validate donation preference
+		 if(!profile.getDonationPreferences().isEmpty()) {
+			 List<DonationPreference> preferences = profile.getDonationPreferences();
+			 for(DonationPreference preference:preferences) {
+				 if(preference == DonationPreference.NULL) {
+					 throw new AppException("preference cannot be NULL");
+				 }
+			 }
+		 }
+		 
+		 
+		 individual.setGender(profile.getGender());
+		 individual.setBloodDetails(profile.getBlood());
+		 individual.setHeightCm(profile.getHeight());
+		 individual.setWeightKg(profile.getWeight());
+		 individual.setDonationPreference(individual.getDonationPreference());
+
+		
+//		 Update database
+		individual = indRepos.save(individual);
+		
+		return true;
+		}
+		catch (Exception e) {
+		System.out.println(e.getMessage());
+		return false;}
 	}
 
 	@Override
@@ -233,12 +299,7 @@ public class IndividualServiceImplementation implements IndividualService {
 		return false;
 	}
 
-    @Override
-    public boolean AddProfile(String individualId, IndividualProfileToShow profile, String licenseKey)
-            throws AppException {
-        // TODO Auto-generated method stub
-        return false;
-    }
+
 
 }
 
